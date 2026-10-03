@@ -13,7 +13,7 @@ export function SearchVisualizer() {
 
   const res = useMemo(() => binarySearchSteps(arr, target), [arr, target]);
   const p = usePlayer(res.steps.length, speed);
-  const s = res.steps[p.index];
+  const s = res.steps[Math.min(p.index, res.steps.length - 1)]!;
 
   const load = (raw: number[]) => {
     const sorted = [...raw].sort((a, b) => a - b);
@@ -32,7 +32,7 @@ export function SearchVisualizer() {
           <input type="number" value={target} onChange={(e) => { setTarget(+e.target.value); p.reset(); }} className="field mt-2 w-full" />
           <div className="mt-4 grid grid-cols-2 gap-2">
             <Btn onClick={() => { const a = parseNumbers(text); if (a.length) load(a); }}>Use Array</Btn>
-            <Btn onClick={() => { const a = randomArray(15, 1, 99); load(a); setTarget(a[Math.floor(Math.random() * a.length)]); }}>Random Array</Btn>
+            <Btn onClick={() => { const a = randomArray(15, 1, 99); load(a); setTarget(a[Math.floor(Math.random() * a.length)]!); }}>Random Array</Btn>
           </div>
         </Panel>
         <Panel><SpeedControl speed={speed} setSpeed={setSpeed} /></Panel>

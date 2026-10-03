@@ -17,7 +17,7 @@ export function SortingVisualizer() {
 
   const result = useMemo(() => (algo === "merge" ? mergeSortSteps(base) : quickSortSteps(base)), [algo, base]);
   const p = usePlayer(result.steps.length, speed);
-  const s = result.steps[p.index];
+  const s = result.steps[Math.min(p.index, result.steps.length - 1)]!;
   const peak = Math.max(...base, 1);
 
   const generate = () => {
