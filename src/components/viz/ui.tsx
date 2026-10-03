@@ -5,7 +5,7 @@ export function Btn({ variant = "ghost", className, ...p }: ButtonHTMLAttributes
   return <button {...p} className={cn("btn", `btn-${variant}`, className)} />;
 }
 
-export function Stat({ label, value, hint }: { label: string; value: ReactNode; hint?: string }) {
+export function Stat({ label, value, hint }: { label: string; value: ReactNode; hint?: string | undefined }) {
   return (
     <div className="panel px-4 py-3" title={hint}>
       <div className="label">{label}</div>
